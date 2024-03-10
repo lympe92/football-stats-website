@@ -1,0 +1,26 @@
+<h2>Create New Post</h2>
+<div class="flex flex-col w-full" [formGroup]="postForm">
+    <mat-form-field >
+        <mat-label>Title</mat-label>
+        <input type="text" matInput formControlName="title" placeholder="Enter a title">
+          <mat-error *ngIf="!postForm.get('title')?.valid">Please enter a title</mat-error>
+      </mat-form-field>
+
+      <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+
+
+      <mat-form-field >
+        <mat-label>Tags</mat-label>
+        <input type="text" matInput formControlName="tags" placeholder="Enter a title">
+          <mat-error *ngIf="!postForm.get('tags')?.valid">Please enter some tags</mat-error>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Categories</mat-label>
+        <input type="text" matInput formControlName="categories" placeholder="Enter a title">
+          <mat-error *ngIf="!postForm.get('title')?.valid">Please enter some categories</mat-error>
+      </mat-form-field>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1">Vissible</mat-radio-button>
+        <mat-radio-button value="2">Draft</mat-radio-button>
+      </mat-radio-group>
+</div>
