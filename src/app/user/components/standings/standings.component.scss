@@ -1,0 +1,44 @@
+.container {
+  margin: 1rem auto;
+  max-width: 1024px;
+}
+
+.league-options-container {
+  position: relative;
+  z-index: 9999;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 2rem;
+}
+
+.options-field {
+  width: 100%;
+  max-width: 350px;
+}
+
+@media (min-width: 576px) {
+  .options-container {
+    flex-direction: row;
+    row-gap: 2rem;
+  }
+
+  .options-field {
+    width: 350px;
+  }
+}

@@ -1,0 +1,116 @@
+<ng-template #loading>
+  <app-loading-spinner class="spinner-container"></app-loading-spinner>
+</ng-template>
+<section
+  *ngIf="leagueMatchesData$ | async as leagueMatchesData; else loading"
+  class="livescores-container container m-auto flex flex-col gap-y-2"
+>
+  <div class="livescores-options-container" [formGroup]="livescoresForm">
+    <div class="livescores-date-live-container">
+      <div class="calendar-container">
+        <button
+          mat-mini-fab
+          class="calendar-button"
+          (click)="onPreviousDate()"
+          [disabled]="
+            selectedDate === calendarDates[0] ||
+            livescoresForm.get('live')?.value ||
+            !livescoresForm.get('allScoresMode')?.value
+          "
+        >
+          <mat-icon class="button-icon">chevron_left</mat-icon>
+        </button>
+
+        <div [class.low-opacity]="livescoresForm.get('live')?.value">
+          {{ selectedDate | date }}
+        </div>
+        <button
+          mat-mini-fab
+          class="calendar-button"
+          (click)="onNextDate()"
+          [disabled]="
+            selectedDate === calendarDates[2] ||
+            livescoresForm.get('live')?.value ||
+            !livescoresForm.get('allScoresMode')?.value
+          "
+        >
+          <mat-icon class="button-icon">chevron_right</mat-icon>
+        </button>
+      </div>
+      <mat-slide-toggle
+        formControlName="live"
+        [disabled]="!livescoresForm.get('allScoresMode')?.value"
+        >Live</mat-slide-toggle
+      >
+    </div>
+    <mat-tab-group
+      class="livescores-viewmode-options"
+      (selectedTabChange)="onChangeField($event)"
+    >
+      <mat-tab
+        [disabled]="livescoresForm.get('live')?.value"
+        label="All scores"
+      ></mat-tab>
+      <mat-tab
+        [disabled]="
+          livescoresForm.get('live')?.value ||
+          !livescoresForm.get('selectedMatchesIds')?.value
+        "
+        label="My scores"
+      ></mat-tab>
+    </mat-tab-group>
+  </div>
+  <mat-accordion *ngFor="let league of leagueMatchesData">
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header class="league-header">
+        <mat-panel-title class="!text-white">
+          {{ league.league.country.name }} - {{ league.league.league.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="flex flex-col">
+        <div class="match-card" *ngFor="let match of league.matches">
+          <div class="flex flex-row items-center gap-x-2">
+            <button
+              *ngIf="!livescoresForm.get('live')?.value"
+              class="calendar-button m-auto"
+            >
+              <mat-icon
+                *ngIf="!onIsMatchSelected(match)"
+                (click)="onAddMatchToMyScores(match)"
+                class="button-icon"
+                >star_outline</mat-icon
+              >
+              <mat-icon
+                *ngIf="onIsMatchSelected(match)"
+                (click)="onRemoveMatchFromMyScores(match)"
+                class="button-icon red-color"
+                >star</mat-icon
+              >
+            </button>
+            <div class="match-card-time" *ngIf="match.fixture.status">
+              {{ match.fixture | liveMatchStatus }}
+            </div>
+            <div *ngIf="match.goals.home !=null" class="match-card-score-container">
+              <span>{{ match.goals.home }}</span>
+              <span>{{ match.goals.away }}</span>
+            </div>
+            <div *ngIf="match.score.halftime.home !=null" class="flex flex-col">
+              <span>{{ match.score.halftime.home }}</span>
+              <span>{{ match.score.halftime.away }}</span>
+            </div>
+            
+         
+
+            <div class="flex flex-col">
+              <h5>{{ match.teams.home.name }}</h5>
+              <h5>{{ match.teams.away.name }}</h5>
+            </div>
+          </div>
+          <mat-icon class="preview-icon" (click)="onMatchNavigate(match)"
+            >preview</mat-icon
+          >
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>

@@ -1,0 +1,28 @@
+.options-field {
+  width: 100%;
+}
+
+.options-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  column-gap: 2rem;
+}
+
+@media (min-width: 576px) {
+  .options-container {
+    flex-direction: row;
+    row-gap: 2rem;
+  }
+
+  .options-field {
+    width: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .options-container {
+    padding: 1rem 0 0 0 !important;
+  }
+}

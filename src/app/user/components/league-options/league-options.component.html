@@ -1,0 +1,24 @@
+<div class="options-container">
+  <mat-form-field class="options-field">
+    <mat-label>League</mat-label>
+    <mat-select
+      [value]="selectedLeague$ | async"
+      (selectionChange)="onLeagueChange($event.value)"
+    >
+      <mat-option [value]="league" *ngFor="let league of leagues$ | async"
+        >{{ league.country.code }}-{{ league.league.name }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="options-field">
+    <mat-label>Season</mat-label>
+    <mat-select
+      [value]="selectedSeason$ | async"
+      (selectionChange)="onSeasonChange($event.value)"
+    >
+      <mat-option [value]="season" *ngFor="let season of seasons">{{
+        season
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -1,68 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { PostFormManagementService } from '../../services/post-form-management.service';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { FirebaseApiService } from '../../../shared/services/firebase-api.service';
+import { PostFormComponent } from './post-form/post-form.component';
+import { take } from 'rxjs';
+import { Router } from '@angular/router';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
   styleUrls: ['./new-post.component.scss'],
 })
-export class NewPostComponent implements OnInit {
+export class NewPostComponent {
+  @ViewChild(PostFormComponent) postFormComponet!: PostFormComponent;
   postForm!: FormGroup;
-  htmlContent:any=''
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    uploadWithCredentials: false,
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
-    ]
-};
 
-  constructor(private _postService: PostFormManagementService) {}
-  ngOnInit(): void {
-    this.postForm = this.getPostForm();
+  constructor(
+    private _firebaseServvice: FirebaseApiService,
+    private _router: Router,
+    private _snackBarService: SnackBarService
+  ) {}
+
+  getFormValue(value: FormGroup): void {
+    this.postForm = value;
   }
 
-  private getPostForm(): FormGroup {
-    return this._postService.getPostForm();
+  savePost(): void {
+    this.setTimestampToPost();
+    this._firebaseServvice
+      .savePost(this.postForm.value)
+      .pipe(take(1))
+      .subscribe(
+        () => {
+          this._snackBarService.openSnackBar('Post created succesfully!');
+          this.postFormComponet.resetPostFormAndValues();
+          this.onPostsNavigate();
+        },
+        (error) => {
+          this._snackBarService.openSnackBar(
+            'There is a problem with post creation!'
+          );
+        }
+      );
+  }
+
+  private setTimestampToPost(): void {
+    this.postForm.get('timestamp')?.setValue(Date.now());
+  }
+
+  onPostsNavigate(): void {
+    this._router.navigate(['editor/posts']);
   }
 }

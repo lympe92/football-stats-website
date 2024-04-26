@@ -1,0 +1,8 @@
+<ng-template #loading>
+  <div class="spinner-container">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</ng-template>
+<div class="container" *ngIf="posts$ | async as posts">
+  <app-basic-post *ngFor="let post of posts" [post]="post"></app-basic-post>
+</div>

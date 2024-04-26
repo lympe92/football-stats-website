@@ -1,0 +1,15 @@
+.submit-button {
+  align-self: self-end;
+  background-color: green !important;
+  color: white !important;
+  width: fit-content !important;
+  padding: 1rem;
+}
+
+.submit-button:hover {
+  opacity: 0.8;
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+}

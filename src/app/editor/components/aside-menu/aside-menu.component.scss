@@ -1,0 +1,72 @@
+.menu-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-top: 1rem;
+  width: 56px;
+  height: 100%;
+  background-color: rgba(15, 10, 10, 0.747);
+  row-gap: 0.5rem;
+}
+
+.pages-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  background-color: rgb(44, 41, 212);
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-title {
+  display: none;
+}
+
+.icon-button {
+  padding: 0 !important;
+}
+
+.icon {
+  color: white;
+  font-size: 20px;
+}
+
+.arrow-left {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 14px 0px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+
+  border-right: 10px solid rgb(255, 255, 255);
+}
+
+.logout-container {
+  cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .menu-container {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    width: 200px;
+  }
+
+  .menu-title {
+    display: block;
+    color: white;
+  }
+}

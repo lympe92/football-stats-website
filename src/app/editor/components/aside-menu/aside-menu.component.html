@@ -1,0 +1,79 @@
+<div class="menu-container">
+  <div class="pages-tabs">
+    <div
+      class="tab justify-start"
+      routerLink="/editor/posts"
+      routerLinkActive="active"
+    >
+      <button class="icon-button" mat-icon-button color="primary">
+        <mat-icon
+          ><span
+            class="material-symbols-outlined icon"
+            [class.active-black]="onIsActive('/editor/new-post')"
+          >
+            filter_list
+          </span></mat-icon
+        >
+      </button>
+      <span class="menu-title">Posts</span>
+      <div class="arrow-left" *ngIf="onIsActive('/editor/posts')"></div>
+    </div>
+    <div
+      class="tab justify-start"
+      routerLink="/editor/new-post"
+      routerLinkActive="active active-black"
+    >
+      <button class="icon-button" mat-icon-button color="primary">
+        <mat-icon
+          ><span
+            class="material-symbols-outlined icon"
+            [class.active-black]="onIsActive('/editor/new-post')"
+          >
+            post_add
+          </span></mat-icon
+        >
+      </button>
+      <span
+        class="menu-title"
+        [class.active-black]="onIsActive('/editor/new-post')"
+        >New post</span
+      >
+      <div class="arrow-left" *ngIf="onIsActive('/editor/new-post')"></div>
+    </div>
+    <div>
+      <div>
+        <div
+          class="tab justify-start"
+          routerLink="/editor/categories"
+          routerLinkActive="active"
+        >
+          <button class="icon-button" mat-icon-button color="primary">
+            <mat-icon
+              ><span class="material-symbols-outlined icon">
+                category
+              </span></mat-icon
+            >
+          </button>
+          <span class="menu-title">Categories</span>
+          <div
+            class="arrow-left"
+            *ngIf="onIsActive('/editor/categories')"
+          ></div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div class="logout-container">
+    <div class="tab justify-start" (click)="onLogout()">
+      <button class="icon-button" mat-icon-button color="primary">
+        <mat-icon
+          ><span class="material-symbols-outlined icon">
+            logout
+          </span></mat-icon
+        >
+      </button>
+      <span class="menu-title">Logout</span>
+    </div>
+  </div>
+</div>

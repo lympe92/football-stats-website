@@ -1,0 +1,69 @@
+.toolbar {
+  background-color: rgb(43, 44, 45);
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+}
+
+.tab {
+  color: white !important;
+  cursor: pointer;
+}
+
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-links-container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+}
+
+.menu-button {
+  display: none;
+}
+
+.side-nav {
+  position: fixed;
+  background-color: rgba(99, 95, 95, 0.507);
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+}
+
+.side-nav-list {
+  width: fit-content;
+  padding: 1rem;
+  background: rgb(255, 255, 255);
+  height: 100%;
+}
+
+.side-nav-list-item {
+  cursor: pointer !important;
+}
+
+.side-nav-login-button {
+  margin: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .active-tab {
+    background-color: white;
+    color: black !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .toolbar-links-container {
+    display: none;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .active-tab {
+    background-color: rgba(0, 0, 0, 0.233);
+  }
+}

@@ -1,0 +1,14 @@
+<div
+  (click)="onPostNavigate(post)"
+  class="card-container"
+  [style.background-image]="'url(' + post.featuredImage + ')'"
+>
+  <div class="card-details">
+    <div class="card-category" (click)="onNavigateToCategory($event)">
+      {{ (post.categories | keyvalue | slice : 0 : 1)[0].key }}
+    </div>
+    <h3 class="card-title" (click)="onPostNavigate(post)">
+      {{ post.title }}
+    </h3>
+  </div>
+</div>

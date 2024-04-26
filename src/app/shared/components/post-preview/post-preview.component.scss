@@ -1,0 +1,49 @@
+.post-preview-container {
+  margin: 1rem;
+  max-width: 1024px;
+  cursor: default;
+}
+
+.post-info-container {
+  padding: 0 0.5rem 2rem 0.5rem;
+}
+
+.post-categories-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post-categories {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.post-category:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.post-title {
+  padding-bottom: 1rem;
+}
+
+.post-date {
+  padding: 0 0.5rem;
+}
+
+.post-image-container {
+  padding-bottom: 1rem;
+}
+
+.news-feed {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .post-preview-container {
+    margin: 1rem auto !important;
+  }
+}

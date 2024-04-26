@@ -1,0 +1,285 @@
+.container {
+  margin: 1rem auto;
+}
+
+section {
+  padding: 1rem;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.news-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-container {
+  width: 1200px;
+  margin: 1rem auto;
+}
+
+.news-header {
+  display: grid;
+  grid-row-gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    "last-post"
+    "news-posts"
+    "news-posts";
+}
+
+.tactical-preview-post {
+  display: none;
+}
+
+.tactical-theory-post {
+  display: none;
+}
+
+.last-post {
+  grid-area: last-post;
+  min-height: 400px;
+}
+
+.news-posts-wrapper {
+  width: 100%;
+  grid-area: news-posts;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.news-posts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 2px solid black;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  height: 100%;
+}
+
+.news-posts-item {
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.news-feed {
+  display: none;
+}
+
+.livescores-wrapper {
+  height: 400px;
+  box-sizing: content-box;
+}
+
+.livescores-container {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background-color: rgb(180, 0, 0);
+  color: white;
+  justify-content: center;
+}
+
+.livescores-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
+.livescores-text-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin: auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.livescores-container:hover .global-livescores-text {
+  text-decoration: underline;
+}
+
+.global-livescores-text {
+  cursor: pointer;
+}
+
+.livescores-image {
+  display: none;
+}
+
+.featured-category {
+  height: 700px;
+}
+
+.news-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+
+.posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.post-item {
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.advertisement-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0000005e;
+  min-width: 300px;
+  width: 300px;
+  height: 600px;
+}
+
+.advertisement {
+  margin: auto;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+.headline {
+  padding: 1rem 0 0 1rem;
+}
+
+.load-button {
+  background-color: rgb(221, 0, 0);
+  color: white;
+  width: 150px;
+  margin: auto;
+}
+
+@media (min-width: 640px) {
+  .news-posts {
+    row-gap: 1rem;
+    column-gap: 0.5rem;
+  }
+
+  .news-posts-item {
+    width: 49%;
+  }
+
+  .post-item {
+    aspect-ratio: 1;
+    width: 47%;
+  }
+
+  .news-container {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .livescores-image {
+    display: block;
+  }
+
+  .livescores-text-container {
+    text-align: start;
+  }
+
+  .news-posts-item {
+    aspect-ratio: auto;
+  }
+
+  .news-posts {
+    row-gap: 0;
+    column-gap: 0;
+  }
+
+  .news-posts-item:not(:first-child):not(:last-child) {
+    border-right: 1px solid black;
+    padding: 0 1rem;
+  }
+
+  .news-posts-item:last-child {
+    padding-left: 1rem;
+  }
+
+  .news-posts-item:first-child {
+    padding-right: 1rem;
+    border-right: 1px solid black;
+  }
+
+  .news-posts-item {
+    width: 20%;
+  }
+  .news-feed {
+    grid-area: news-feed;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-header {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "last-post last-post news-feed"
+      "last-post last-post news-feed"
+      "news-posts news-posts news-posts";
+  }
+
+  .last-post {
+    grid-area: last-post;
+    border-right: 1px solid black;
+    padding: 0 1rem 1rem 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .tactical-preview-post {
+    display: flex !important;
+    grid-area: tactical-preview-post;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .tactical-theory-post {
+    display: flex !important;
+    grid-area: tactical-theory-post;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .news-header {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "tactical-preview-post last-post last-post news-feed"
+      "tactical-theory-post last-post last-post news-feed"
+      "news-posts news-posts news-posts news-posts";
+  }
+
+  .last-post {
+    grid-area: last-post;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0 2rem 1rem 2rem;
+  }
+}

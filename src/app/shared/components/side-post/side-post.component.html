@@ -1,0 +1,11 @@
+<div class="side-post-container" (click)="onPostNavigate(post)">
+  <div class="side-post-image"><img [src]="post.featuredImage" /></div>
+  <div class="side-post-details">
+    <div class="side-post-category" (click)="onNavigateToCategory($event)">
+      {{ (post.categories | keyvalue | slice : 0 : 1)[0].key }}
+    </div>
+    <div class="side-post-title" (click)="onPostNavigate(post)">
+      {{ post.title }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="flex flex-col gap-y-4">
+  <div class="flex flex-row items-center gap-x-4">
+    <mat-form-field class="filter-categories-field">
+      <mat-label>Status</mat-label>
+      <mat-select [formControl]="statusControl" multiple>
+        <mat-select-trigger>
+          {{statusControl.value?.[0] || ''}}
+          <span *ngIf="statusControl.value && statusControl.value.length > 1">
+            (+{{ (statusControl.value.length || 0) - 1 }}
+            {{ statusControl.value.length === 2 ? "other" : "others" }})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let status of postStatuses" [value]="status">{{
+          status
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="filter-categories-field">
+      <mat-label>Categories</mat-label>
+      <mat-select
+        panelClass="my-panel-class"
+        [formControl]="categoriesControl"
+        multiple
+      >
+        <mat-select-trigger>
+          {{categoriesControl.value?.[0] || ''}}
+          <span
+            *ngIf="
+              categoriesControl.value && categoriesControl.value.length > 1
+            "
+          >
+            (+{{ (categoriesControl.value.length || 0) - 1 }}
+            {{ categoriesControl.value.length === 2 ? "other" : "others" }})
+          </span>
+        </mat-select-trigger>
+        <mat-option
+          *ngFor="let category of postCategories$ | async"
+          [value]="category?.title"
+          >{{ category?.title }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      class="filter-button"
+      (click)="onFetchPostsBySearch()"
+    >
+      Filter
+    </button>
+  </div>
+  <table
+    *ngIf="posts$ | async as posts; else loading"
+    mat-table
+    [dataSource]="reversePosts(posts)"
+    class="mat-elevation-z8"
+  >
+    <ng-container  matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef style="min-width: 200px;">Title</th>
+      <td mat-cell *matCellDef="let post">{{ post?.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let post">{{ post?.status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="categories">
+      <th mat-header-cell *matHeaderCellDef>Categories</th>
+      <td mat-cell *matCellDef="let post">
+        <ng-container *ngFor="let category of post?.categories | keyvalue">
+          <button class="tab-button">{{ category.key }}</button>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef>Tags</th>
+      <td mat-cell *matCellDef="let post">
+        <ng-container *ngFor="let category of post?.tags">
+          <button class="tab-button">{{ category }}</button>
+        </ng-container>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Edit</th>
+      <td mat-cell *matCellDef="let post">
+        <mat-icon class="edit-icon" (click)="onOpenEditPostDialog(post)"
+          >edit</mat-icon
+        >
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Delete</th>
+      <td mat-cell *matCellDef="let post">
+        <mat-icon class="delete-icon" (click)="onDeletePostDialog(post)"
+          >delete_forever</mat-icon
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <ng-template #loading>
+    <div class="spinner-container">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+  </ng-template>
+</div>

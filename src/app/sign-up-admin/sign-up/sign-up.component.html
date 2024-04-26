@@ -1,0 +1,52 @@
+<div class="signup-container">
+  <div class="close-button-container">
+    <button mat-fab (click)="navigateToHomePage()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="signup-form-container" [formGroup]="signUpForm">
+    <h2>Admin sign up</h2>
+    <mat-form-field class="w-full">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Enter an email"
+      />
+      <mat-error *ngIf="!signUpForm.get('email')?.valid"
+        >Please enter an email</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Password</mat-label>
+      <input
+        [type]="hidePassword ? 'password' : 'text'"
+        type="password"
+        matInput
+        formControlName="password"
+        placeholder="Enter a password"
+      /><mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
+        hidePassword ? "visibility_off" : "visibility"
+      }}</mat-icon>
+      <mat-error *ngIf="!signUpForm.get('password')?.valid"
+        >Should be up to 6 chars</mat-error
+      >
+    </mat-form-field>
+
+    <span
+      >Have an account?
+      <span class="sign-in-link" (click)="navigateToSignIn()"
+        >Sign in</span
+      ></span
+    >
+    <button
+      mat-raised-button
+      class="submit-button"
+      [disabled]="!signUpForm || !signUpForm.valid"
+      (click)="onSubmit()"
+    >
+      Create
+    </button>
+  </div>
+</div>

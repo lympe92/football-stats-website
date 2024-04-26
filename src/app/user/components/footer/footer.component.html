@@ -1,0 +1,61 @@
+<div class="footer-container">
+  <div class="footer-content">
+    <div class="container m-auto pages-container">
+      <div class="pages-column logo-container m-auto">LOGO</div>
+      <div class="pages-column">
+        <h4 class="pages-header">Standings</h4>
+        <div class="pages-items">
+          <span (click)="onNavigateToUrl('standings/39')">Serie A</span>
+          <span (click)="onNavigateToUrl('standings/61')">Ligue 1</span>
+          <span (click)="onNavigateToUrl('standings/140')">La liga</span>
+          <span (click)="onNavigateToUrl('standings/78')">Bundesliga</span>
+        </div>
+      </div>
+      <div class="pages-column">
+        <h4 class="pages-header">Statistics</h4>
+        <div class="pages-items">
+          <span (click)="onNavigateToUrl('statistics/39')">Serie A</span>
+          <span (click)="onNavigateToUrl('statistics/61')">Ligue 1</span>
+          <span (click)="onNavigateToUrl('statistics/140')">La liga</span>
+          <span (click)="onNavigateToUrl('statistics/78')">Bundesliga</span>
+        </div>
+      </div>
+
+      <div class="pages-column">
+        <h4 class="pages-header">Follow us</h4>
+        <div class="pages-items">
+          <span>Facebook</span>
+          <span>Instagram</span>
+          <span>Youtube</span>
+          <span>Spotify</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="slogan container">IT'S ONLY FOR TRAINING AS DEVELOPER</h3>
+
+    <div class="info container m-auto">
+      <span class="info-item" (click)="onOpenFooterInfoDialog('Contact')"
+        >Contact</span
+      >
+      <span
+        class="info-item"
+        (click)="onOpenFooterInfoDialog('Terms & conditions')"
+        >Terms & conditions</span
+      >
+      <span class="info-item" (click)="onOpenFooterInfoDialog('Privacy rights')"
+        >Privacy rights</span
+      >
+      <span class="info-item" (click)="onOpenFooterInfoDialog('Cookie policy')"
+        >Cookie policy</span
+      >
+    </div>
+  </div>
+
+  <span class="footer-rights">All rights reserved © 2024 myWebsite.com</span>
+</div>
+
+<!-- rgb(43,44,45)
+rgb(237,238,240)
+rgb(221,0,0)
+rgb(180,0,0) -->

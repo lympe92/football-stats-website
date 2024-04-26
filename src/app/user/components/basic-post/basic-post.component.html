@@ -1,0 +1,9 @@
+<div class="basic-post-container" (click)="onPostNavigate()">
+  <img class="basic-post-image" [src]="post.featuredImage" />
+  <div class="basic-post-content">
+    <span class="basic-post-time">{{ post.timestamp | date : "short" }}</span>
+    <h3 class="basic-post-title font-medium">{{ post.title }}</h3>
+    <p class="basic-post-text">{{ post.text | richTextToString }}</p>
+    <p></p>
+  </div>
+</div>

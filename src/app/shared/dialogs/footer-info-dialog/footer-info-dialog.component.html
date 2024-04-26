@@ -1,0 +1,16 @@
+<div class="flex flex-col h-full">
+  <h2 mat-dialog-title>{{ data.value }}!</h2>
+  <mat-dialog-content class="h-full">
+    <p>Here is a Dialog for {{ data.value }}?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex flex-row !justify-end !items-end">
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      class="delete-button"
+    >
+      Ok
+    </button>
+  </mat-dialog-actions>
+</div>

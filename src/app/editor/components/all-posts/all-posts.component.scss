@@ -1,0 +1,42 @@
+.filter-categories-field {
+  height: 45px;
+}
+
+.tab-button {
+  padding: 0.25rem;
+  border: 1px solid black;
+  margin: 0.25rem;
+  border-radius: 4px;
+  cursor: default;
+}
+
+.delete-icon {
+  color: red;
+}
+
+.delete-icon:hover {
+  color: rgba(255, 0, 0, 0.5);
+}
+
+.edit-icon {
+  color: green;
+}
+
+.edit-icon:hover {
+  color: rgba(0, 128, 0, 0.5);
+}
+
+.filter-button {
+  height: 45px;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,222 @@
+<ng-template #loading>
+  <div class="spinner-container">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</ng-template>
+<div
+  class="container flex flex-col gap-y-16"
+  *ngIf="match$ | async as match; else loading"
+>
+  <div class="match-details gap-y-4">
+    <h3>{{ match.league.country }} - {{ match.league.name }}</h3>
+
+    <div class="match-details-container">
+      <div class="flex flex-col justify-center items-center">
+        <h4 class="font-medium">{{ match.teams.home.name }}</h4>
+        <img  class="team-logo"  [src]="match.teams.home.logo" />
+      </div>
+
+      <div class="match-details-info">
+        <span *ngIf="match.fixture.status.elapsed"
+          >Score: <span>{{ match.goals.home }} - {{ match.goals.away }} </span>
+        </span>
+
+        <span *ngIf="match.fixture.status.elapsed">
+          FT:
+          <span class="font-medium" *ngIf="match.score.fulltime.home != null"
+            >{{ match.score.fulltime.home }} -
+            {{ match.score.fulltime.away }}</span
+          >
+        </span>
+        <span *ngIf="match.fixture.status.elapsed">
+          HT:
+          <span class="font-medium" *ngIf="match.score.halftime.home >= 0"
+            >{{ match.score.halftime.home }} -
+            {{ match.score.halftime.away }}</span
+          >
+        </span>
+
+        <span
+          >Kick off:
+          <span class="font-medium">
+            {{ match.fixture.timestamp * 1000 | date : "HH:mm" }}</span
+          ></span
+        >
+        <span *ngIf="match.fixture.referee"
+          >Referee:
+          <span class="font-medium"> {{ match.fixture.referee }}</span></span
+        >
+
+        <span>
+          Date:
+          <span class="font-medium">{{
+            match.fixture.timestamp * 1000 | date : "fullDate"
+          }}</span></span
+        >
+        <span
+          >Location:
+          <span class="font-medium">{{ match.fixture.venue.name }}</span></span
+        >
+      </div>
+      <div class="flex flex-col justify-center items-center">
+        <h4 class="font-medium">{{ match.teams.away.name }}</h4>
+        <img class="team-logo" [src]="match.teams.away.logo" />
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="chartOptions">
+    <h4 class="section-header">Head to head</h4>
+    <apx-chart
+      [series]="chartOptions['series']"
+      [chart]="chartOptions['chart']"
+      [xaxis]="chartOptions['xaxis']"
+    ></apx-chart>
+  </div>
+
+  <div class="match-lineups-container" *ngIf="match.lineups.length > 0">
+    <h4 class="section-header">Probable Lineups</h4>
+    <div class="match-lineups-info">
+      <div class="match-lineups-formations">
+        <span> {{ match.teams.home.name }} </span>
+        <span>{{ match.lineups[0].formation }}</span>
+      </div>
+      <div class="match-lineups-formations">
+        <span>{{ match.teams.away.name }} </span>
+        <span class="text-end">{{ match.lineups[1].formation }}</span>
+      </div>
+    </div>
+    <div class="match-lineups-pitch">
+      <div class="match-lineups-pitch-img"></div>
+      <div class="teams-formattion">
+        <div class="home-team-formattion">
+          <div
+            class="pitch-line"
+            *ngFor="
+              let line of onOrganizePlayersIntoLines(
+                match?.lineups?.[0]?.startXI,
+                match.players[0]?.players
+              )
+            "
+          >
+            <div
+              class="pitch-position pitch-position-home relative"
+              *ngFor="let seat of line"
+            >
+              <img
+                *ngIf="seat.player.photo"
+                class="pitch-image"
+                [src]="seat.player.photo"
+              />
+              <span class="pitch-player"
+                >{{ seat.player.number }} {{ seat.player.name | playerName }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="away-team-formattion">
+          <div
+            class="pitch-line"
+            *ngFor="
+              let line of onOrganizePlayersIntoLines(
+                match?.lineups?.[1]?.startXI,
+                match.players[1]?.players
+              )
+            "
+          >
+            <div
+              class="pitch-position pitch-position-home relative"
+              *ngFor="let seat of line"
+            >
+              <img
+                *ngIf="seat.player.photo"
+                class="pitch-image"
+                [src]="seat.player.photo"
+              />
+              <span class="pitch-player"
+                >{{ seat.player.number }} {{ seat.player.name | playerName }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="match-substitutes-container" *ngIf="match.lineups.length > 0">
+    <h4 class="section-header">Substitutes</h4>
+    <div class="match-substitutes-teams">
+      <div class="match-substitutes">
+        <div
+          *ngFor="let subPlayer of match?.lineups?.[0]?.substitutes; let i = index"
+          [class.background-color]="i % 2 === 0"
+          class="match-substitutes-player"
+        >
+          <span class="match-substitutes-player-number"
+            >{{ subPlayer.player.number }}
+          </span>
+          <span>
+            {{ subPlayer.player.pos }} {{ subPlayer.player.name | playerName }}
+          </span>
+        </div>
+      </div>
+      <div class="match-substitutes">
+        <div
+          *ngFor="let subPlayer of match?.lineups?.[1]?.substitutes; let i = index"
+          [class.background-color]="i % 2 === 0"
+          class="match-substitutes-player"
+        >
+          <span class="match-substitutes-player-number"
+            >{{ subPlayer.player.number }}
+          </span>
+          <span>
+            {{ subPlayer.player.pos }} {{ subPlayer.player.name | playerName }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="match-statistics-container" *ngIf="match.statistics.length > 0">
+    <h4 class="section-header">Match statistics</h4>
+    <div
+      class="match-statistic"
+      *ngFor="let stat of match.statistics[0].statistics; let i = index"
+    >
+      <span> {{ stat.type }}</span>
+      <div class="flex flex-row w-full relative">
+        <div class="match-statistic-value left-0">
+          {{ match.statistics[0].statistics[i].value }}
+        </div>
+        <mat-progress-bar
+          class="match-details-bar-reversed"
+          mode="determinate"
+          [value]="
+            onIsPercentage(match.statistics[0].statistics[i].value)
+              ? onCovertPercentageToNumber(
+                  match.statistics[0].statistics[i].value
+                )
+              : (100 * match.statistics[0].statistics[i].value) /
+                (match.statistics[0].statistics[i].value +
+                  match.statistics[1].statistics[i].value)
+          "
+        ></mat-progress-bar
+        ><mat-progress-bar
+          mode="determinate"
+          [value]="
+            onIsPercentage(match.statistics[1].statistics[i].value)
+              ? onCovertPercentageToNumber(
+                  match.statistics[1].statistics[i].value
+                )
+              : (100 * match.statistics[1].statistics[i].value) /
+                (match.statistics[0].statistics[i].value +
+                  match.statistics[1].statistics[i].value)
+          "
+        ></mat-progress-bar>
+        <div class="match-statistic-value right-0">
+          {{ match.statistics[1].statistics[i].value }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

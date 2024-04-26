@@ -1,0 +1,299 @@
+<div class="container">
+  <app-league-options [urlParams]="urlParams"></app-league-options>
+  <ng-template #loading>
+    <div class="relative" style="min-height: 150px">
+      <div class="spinner-container">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+    </div>
+  </ng-template>
+  <div *ngIf="leagueStatistics$ | async as leagueStatistics; else loading">
+    <div class="card">
+      <div class="card-item">
+        <h4 class="card-item-header">Most winning Teams</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostWinningTeam of leagueStatistics.mostWins;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostWinningTeam.team.name }}</td>
+            <td>{{ mostWinningTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-item">
+        <h4 class="card-item-header">Best winning streak</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let bestWinningStreakTeam of leagueStatistics.bestWinningStreak;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ bestWinningStreakTeam.team.name }}</td>
+            <td>{{ bestWinningStreakTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-item">
+        <h4 class="card-item-header">Most drawing Teams</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostDrawingTeam of leagueStatistics.mostDraws;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostDrawingTeam.team.name }}</td>
+            <td>{{ mostDrawingTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-item">
+        <h4 class="card-item-header">Best drawing streak</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let bestDrawingStreakTeam of leagueStatistics.bestDrawingStreak;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ bestDrawingStreakTeam.team.name }}</td>
+            <td>{{ bestDrawingStreakTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-item">
+        <h4 class="card-item-header">Most losing Teams</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostLosingTeam of leagueStatistics.mostLoses;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostLosingTeam.team.name }}</td>
+            <td>{{ mostLosingTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-item">
+        <h4 class="card-item-header">Best losing streak</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let bestLosingStreakTeam of leagueStatistics.bestLosingStreak;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ bestLosingStreakTeam.team.name }}</td>
+            <td>{{ bestLosingStreakTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-item">
+        <h4 class="card-item-header">Most clean sheets</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostCleanSheetsTeam of leagueStatistics.mostCleanSheets;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostCleanSheetsTeam.team.name }}</td>
+            <td>{{ mostCleanSheetsTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-item">
+        <h4 class="card-item-header">Best failed to score streak</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostfailedToScoreTeam of leagueStatistics.mostfailedToScore;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostfailedToScoreTeam.team.name }}</td>
+            <td>{{ mostfailedToScoreTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-item">
+        <h4 class="card-item-header">Most red cards</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostRedCardsTeam of leagueStatistics.mostRedCards;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostRedCardsTeam.team.name }}</td>
+            <td>{{ mostRedCardsTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-item">
+        <h4 class="card-item-header">Most yellow cards</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostYellowCardsTeam of leagueStatistics.mostYellowCards;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostYellowCardsTeam.team.name }}</td>
+            <td>{{ mostYellowCardsTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-item">
+        <h4 class="card-item-header">Most penalties gained</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostPenaltiesGainedTeam of leagueStatistics.mostPenaltiesGained;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostPenaltiesGainedTeam.team.name }}</td>
+            <td>{{ mostPenaltiesGainedTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card-item">
+        <h4 class="card-item-header">Most penalties to goal</h4>
+        <table>
+          <tr>
+            <th class="table-item-no">No</th>
+            <th>Team</th>
+            <th class="table-item-value">Value</th>
+          </tr>
+          <tr
+            *ngFor="
+              let mostPenaltiesToGoalPercentageTeam of leagueStatistics.mostPenaltiesToGoalPercentage;
+              let i = index
+            "
+            [class.light-colored-row]="i % 2 !== 0"
+            class="text-center"
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ mostPenaltiesToGoalPercentageTeam.team.name }}</td>
+            <td>{{ mostPenaltiesToGoalPercentageTeam.value }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<ng-container [formGroup]="postForm">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="title"
+      placeholder="Enter a title"
+      (blur)="emitForm()"
+    />
+    <mat-error *ngIf="!postForm.get('title')?.valid"
+      >Please enter a title</mat-error
+    >
+  </mat-form-field>
+  <div class="featured-image-container">
+    <button
+      mat-raised-button
+      class="submit-button"
+      (click)="onClick(structureImageUpload)"
+    >
+      Add image
+    </button>
+    <input
+      id="upload-input"
+      type="file"
+      class="file-input"
+      #structureImageUpload
+      (input)="onStructureFormImageClick($event)"
+    />
+    <div class="file-upload justify-center m-auto">
+      <div (dblclick)="onClick(structureImageUpload)" class="form-image">
+        <img id="form-image" [src]="postForm.get('featuredImage')?.value" />
+      </div>
+    </div>
+  </div>
+
+  <div class="NgxEditor__Wrapper grow mb-8 flex flex-col post-form-editor">
+    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+    <ngx-editor
+      class="grow"
+      [editor]="editor"
+      formControlName="text"
+      [placeholder]="'Type here...'"
+      (blur)="emitForm()"
+    ></ngx-editor>
+  </div>
+
+  <div class="mb-8">
+    <mat-label>Categories</mat-label>
+    <mat-chip-listbox #chipListbox aria-label="Fish selection" multiple>
+      <mat-chip-option
+        (click)="onUpdateCategoriesValue(chipListbox)"
+        [selected]="onIsInitialCategory(category)"
+        *ngFor="let category of postCategories$ | async"
+        >{{ category?.title }}</mat-chip-option
+      >
+    </mat-chip-listbox>
+  </div>
+
+  <mat-form-field class="example-chip-list">
+    <mat-label>Tags</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Enter tags" formControlName="tags">
+      <mat-chip-row
+        *ngFor="let tag of tags"
+        (removed)="onRemoveTag(tag)"
+        [editable]="true"
+        (edited)="onEditTag(tag, $event)"
+        [aria-description]="'press enter to edit ' + tag"
+      >
+        {{ tag }}
+        <button matChipRemove [attr.aria-label]="'remove ' + tag">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row> 
+      <input
+        [disabled]="this.tags.length >= 5"
+        [placeholder]="getTagsPlaceholder()"
+        [matChipInputFor]="chipGrid"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="onAddTag($event)"
+      />
+    </mat-chip-grid>
+    <mat-error *ngIf="!postForm.get('tags')?.valid"
+      >Please enter some tags</mat-error
+    >
+  </mat-form-field>
+
+  <mat-radio-group formControlName="status" aria-label="Select an option">
+    <mat-radio-button value="visible">Visible</mat-radio-button>
+    <mat-radio-button value="draft">Draft</mat-radio-button>
+  </mat-radio-group>
+</ng-container>

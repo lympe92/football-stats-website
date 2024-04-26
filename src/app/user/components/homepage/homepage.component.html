@@ -1,0 +1,95 @@
+<ng-template #loading>
+  <div class="spinner-container">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</ng-template>
+<div class="container flex flex-col" *ngIf="posts$ | async as posts">
+  <ng-container *ngIf="posts.length > 0; else loading">
+    <section class="news-header">
+      <app-post-header-card
+        *ngIf="tacticPost$ | async as tacticPost; else loading"
+        [post]="tacticPost"
+        class="tactical-preview-post"
+      ></app-post-header-card>
+      <app-post-header-card
+        *ngIf="playerPost$ | async as playerPost; else loading"
+        [post]="playerPost"
+        class="tactical-theory-post"
+      ></app-post-header-card>
+
+      <app-post-header-card
+        [post]="posts[0]"
+        class="last-post flex"
+      ></app-post-header-card>
+
+      <div class="news-feed gap-y-4">
+        <div *ngFor="let news of posts | slice : 0 : 5">
+          <app-side-post [post]="news" class="flex h-full"></app-side-post>
+        </div>
+      </div>
+
+      <div
+        class="news-posts-wrapper"
+        *ngIf="tacticPreviewPost$ | async as tacticPreviewPost; else loading"
+      >
+        <h3>News</h3>
+        <div class="news-posts">
+          <div class="news-posts-item" *ngFor="let news of tacticPreviewPost">
+            <app-post-header-card
+              [post]="news"
+              class="flex h-full"
+            ></app-post-header-card>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="livescores-wrapper">
+      <div class="livescores-container">
+        <div class="container livescores-text-container">
+          <div class="livescores-header">
+            <h2 class="global-livescores-header">What's the score?</h2>
+            <h4
+              class="global-livescores-text"
+              (click)="onNavigate('/livescores')"
+            >
+              Check livescores now!
+            </h4>
+          </div>
+          <div class="livescores-image">
+            <img class="h-full" src="assets/images/livescores.png" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="news-wrapper">
+      <div class="headline">
+        <h2 class="underline">Articles</h2>
+      </div>
+      <div class="news-container">
+        <div class="flex flex-col gap-y-4">
+          <div class="posts gap-y-4 gap-x-4">
+            <app-post-header-card
+              class="post-item"
+              *ngFor="let news of posts"
+              [post]="news"
+            ></app-post-header-card>
+          </div>
+          <button
+            mat-raised-button
+            class="load-button"
+            (click)="onLoadMorePosts()"
+            *ngIf="!hideLoadMore"
+          >
+            Load more
+          </button>
+        </div>
+
+        <div class="advertisement-container">
+          <div class="advertisement">Advertisement</div>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>

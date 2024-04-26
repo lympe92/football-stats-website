@@ -32,7 +32,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [ "node_modules/apexcharts/dist/apexcharts.min.js"]
           },
           "configurations": {
             "production": {
@@ -56,13 +56,21 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {"browserTarget":  "football-stats-website:build",
+        "proxyConfig": "src/proxy.conf.json"},
           "configurations": {
             "production": {
               "browserTarget": "football-stats-website:build:production"

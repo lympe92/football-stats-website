@@ -1,0 +1,248 @@
+.container {
+  margin: 2rem auto;
+  max-width: 1024px;
+}
+
+.section-header { 
+  padding: 0 1rem 1rem 1rem;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-details {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(237, 238, 240);
+}
+
+.match-details-teams {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.match-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  column-gap: 0.5rem;
+}
+
+.match-details-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  min-width: 160px;
+  text-align: center;
+}
+
+.team-logo{
+  width: 70px;
+}
+
+.match-lineups-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.match-lineups-info {
+  background-color: rgb(221, 0, 0);
+  color: rgb(237, 238, 240);
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.match-lineups-formations {
+  display: flex;
+  flex-direction: column;
+}
+
+.match-lineups-pitch {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  width: 100%;
+}
+
+.match-lineups-pitch-img {
+  background-size: cover !important;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  transform-origin: center;
+  background: url("/assets/images/pitch-rotated.svg") no-repeat center;
+  width: 100%;
+  height: 100%;
+}
+
+.teams-formattion {
+  width: 100%;
+
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-team-formattion {
+  padding: 1rem;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+}
+
+.away-team-formattion {
+  padding: 1rem;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.pitch-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.pitch-position {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.5rem;
+
+  width: 100px;
+  height: 100px;
+}
+
+.pitch-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.pitch-player {
+  text-align: center;
+  color: white;
+  font-size: 0.75rem;
+}
+
+.pitch-image-home {
+  background-color: rgb(237, 238, 240);
+  border: 2px solid black;
+}
+
+.pitch-image-away {
+  color: rgb(237, 238, 240);
+  background-color: rgb(43, 44, 45);
+  border: 2px solid rgb(237, 238, 240);
+}
+
+.match-substitutes-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.match-substitutes-teams {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.match-substitutes {
+  width: 300px;
+}
+
+.match-substitutes-player {
+  padding: 0.5rem;
+}
+
+.match-substitutes-player-number {
+  display: inline-block;
+  text-align: end;
+  width: 20px;
+}
+
+.background-color {
+  background-color: rgb(237, 238, 240);
+}
+
+.match-statistics-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.match-statistic {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.25rem;
+}
+
+.match-statistic-value {
+  position: absolute;
+  padding: 10px;
+  bottom: 0;
+  color: rgb(0, 0, 0);
+}
+
+.match-details-bar-reversed {
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+@media (min-width: 1024px) {
+  .match-lineups-pitch-img {
+    background: url("/assets/images/pitch.svg");
+  }
+
+  .teams-formattion {
+    flex-direction: row;
+  }
+
+  .home-team-formattion {
+    flex-direction: row;
+    width: 48%;
+  }
+
+  .away-team-formattion {
+    flex-direction: row-reverse;
+    width: 48%;
+  }
+
+  .pitch-line {
+    flex-direction: column;
+    width: 20px;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="post-preview-container" *ngIf="post$ | async as post">
+  <div class="post-image-container"><img [src]="post?.featuredImage" /></div>
+  <div class="post-info-container">
+    <div class="post-categories-container">
+      <div class="post-categories font-medium">
+        <span
+          *ngFor="let category of post.categories | keyvalue"
+          class="post-category"
+          (click)="onNavigateToCategory(category.key)"
+          >{{ category.key }}
+        </span>
+      </div>
+      <div>Reading time: {{ post.text | readingTime }} '</div>
+    </div>
+  </div>
+  <div class="post-date">{{ post.timestamp | date : "medium" }}</div>
+  <h2 class="post-title">{{ post.title }}</h2>
+  <div class="post-text">
+    <ngx-editor
+      [editor]="editor"
+      [ngModel]="post.text"
+      [disabled]="true"
+    ></ngx-editor>
+  </div>
+  <div class="post-tags"></div>
+  <h3 class="font-medium pt-12 pb-6">Related Posts</h3>
+  <div class="news-feed gap-y-4">
+    <div *ngFor="let news of posts$ | async">
+      <app-side-post
+        [post]="news"
+        class="flex h-full"
+        (click)="onPostNavigate(news)"
+      ></app-side-post>
+    </div>
+  </div>
+</div>

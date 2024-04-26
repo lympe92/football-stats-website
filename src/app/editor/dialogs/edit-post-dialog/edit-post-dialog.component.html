@@ -1,0 +1,22 @@
+<div class="flex flex-col h-full">
+  <h2 mat-dialog-title>Edit Post!</h2>
+  <mat-dialog-content class="mat-typography grow">
+    <app-post-form
+      class="flex flex-col h-full"
+      (emitPostForm)="getFormValue($event)"
+      [post]="data?.post"
+    ></app-post-form>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex flex-row !justify-end !items-end !p-4">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      class="edit-button"
+      mat-button
+      [mat-dialog-close]="postForm.value"
+      [disabled]="!postForm || !postForm.valid"
+      cdkFocusInitial
+    >
+      Edit
+    </button>
+  </mat-dialog-actions>
+</div>

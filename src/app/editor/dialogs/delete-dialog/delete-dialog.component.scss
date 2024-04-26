@@ -1,0 +1,11 @@
+.delete-button {
+  align-self: self-end;
+  background-color: green !important;
+  color: white;
+  width: fit-content !important;
+  padding: 1rem;
+}
+
+.delete-button:hover {
+  opacity: 0.8;
+}

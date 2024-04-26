@@ -1,0 +1,43 @@
+.side-post-container {
+  height: 85px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
+  cursor: pointer;
+}
+
+.side-post-image {
+  min-width: 85px;
+  height: 85px;
+}
+
+.side-post-image img {
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+.side-post-title {
+  font-size: 0.85rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.side-post-category {
+  font-size: 0.75rem;
+  font-weight: 300;
+}
+
+.side-post-details {
+  margin: auto;
+}
+
+.side-post-category:hover {
+  text-decoration: underline;
+}
+
+.side-post-title:hover {
+  text-decoration: underline;
+}

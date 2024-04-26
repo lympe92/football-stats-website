@@ -1,0 +1,92 @@
+<mat-toolbar class="toolbar">
+  <mat-toolbar-row>
+    <button
+      mat-icon-button
+      class="menu-button tab"
+      (click)="sideNavOpen = !sideNavOpen"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="tab" (click)="onHomepageNavigate()">Stats Website</span>
+    <span class="menu-spacer"></span>
+    <div class="toolbar-links-container">
+      <a
+        class="tab"
+        [class.active-tab]="onIsActive('/news')"
+        routerLink="categories/news"
+        routerLinkActive="active"
+        mat-button
+        >News</a
+      >
+      <a
+        class="tab"
+        [class.active-tab]="onIsActive('/livescores')"
+        routerLink="/livescores"
+        routerLinkActive="active"
+        mat-button
+        >Livescores</a
+      >
+      <a
+        class="tab"
+        [class.active-tab]="onIsActive('/standings')"
+        [routerLink]="['/standings', 39]"
+        routerLinkActive="active"
+        mat-button
+        >Standings</a
+      >
+      <a
+        class="tab"
+        [class.active-tab]="onIsActive('/statistics')"
+        [routerLink]="['/statistics', 39]"
+        routerLinkActive="active"
+        mat-button
+        >Statistics</a
+      >
+      <button mat-raised-button (click)="onLoginNavigate()">Login</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="side-nav" *ngIf="sideNavOpen">
+  <mat-list
+    class="side-nav-list"
+    role="list"
+    (click)="sideNavOpen = !sideNavOpen"
+  >
+    <mat-list-item
+      [class.active-tab]="onIsActive('/news')"
+      routerLink="/news"
+      role="listitem"
+      class="side-nav-list-item"
+      >News</mat-list-item
+    >
+    <mat-list-item
+      [class.active-tab]="onIsActive('/livescores')"
+      routerLink="/livescores"
+      role="listitem"
+      class="side-nav-list-item"
+      >Livescores</mat-list-item
+    >
+    <mat-list-item
+      [class.active-tab]="onIsActive('/standings')"
+      routerLink="/standings/39"
+      role="listitem"
+      class="side-nav-list-item"
+      >Standings</mat-list-item
+    >
+    <mat-list-item
+      [class.active-tab]="onIsActive('/statistics')"
+      routerLink="/statistics/39"
+      role="listitem"
+      class="side-nav-list-item"
+      >Statistics</mat-list-item
+    >
+    <button
+      mat-raised-button
+      class="side-nav-login-button"
+      (click)="onLoginNavigate()"
+    >
+      Login
+    </button>
+  </mat-list>
+</div>
